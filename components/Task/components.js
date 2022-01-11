@@ -46,6 +46,15 @@ export const Icons = ({ side, selected, completed, priority, onPress }) => {
                 },
             ]}
         >
+            <FontAwesome
+                name={name}
+                style={[
+                    styles.taskCircleIcon,
+                    {
+                        color: finalColor,
+                    },
+                ]}
+            />
             <View
                 style={[
                     styles.taskCircleInner,
@@ -53,17 +62,7 @@ export const Icons = ({ side, selected, completed, priority, onPress }) => {
                         backgroundColor: side === 'right' ? null : finalColor,
                     },
                 ]}
-            >
-                <FontAwesome
-                    name={name}
-                    style={[
-                        styles.taskCircleIcon,
-                        {
-                            color: finalColor,
-                        },
-                    ]}
-                />
-            </View>
+            ></View>
         </Pressable>
     )
 }

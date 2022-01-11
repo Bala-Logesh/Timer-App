@@ -18,3 +18,11 @@ export const getColor = color => {
             return '#000'
     }
 }
+
+export const createArray = (end, start = 0) => {
+    let arr = []
+    for (let i = start; i < end; i++) {
+        arr.push(i)
+    }
+    return arr
+}

@@ -22,6 +22,7 @@ export default styles = StyleSheet.create({
     },
     taskCircleIcon: {
         fontSize: fontSize.regular,
+        position: 'absolute',
     },
     taskBody: {
         flex: 1,

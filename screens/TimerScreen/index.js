@@ -1,14 +1,19 @@
 import { useState } from 'react'
-import { ContainerWrapper, ButtonsWrapper } from '../../globals/wrappers'
+import {
+    ContainerWrapper,
+    ButtonsWrapper,
+    CardWrapper,
+} from '../../globals/wrappers'
 import CustomButton from '../../components/CustomButton'
 import TimerDisplay from '../../components/TimerDisplay'
 import Task from '../../components/Task'
+import ScrollerInput from '../../components/ScrollerInput'
 
 export default function Timer() {
     const [time, setTime] = useState({
-        hr: 12,
-        min: 12,
-        sec: 12,
+        hh: 12,
+        mm: 12,
+        ss: 12,
     })
 
     const data = [
@@ -37,16 +42,19 @@ export default function Timer() {
             break: '25 min',
             priority: 'Low',
             selected: true,
-            completed: false,
+            completed: true,
         },
     ]
 
     return (
         <ContainerWrapper>
             <Task data={data[0]} onPress={() => console.warn('Pressed')} />
-            <Task data={data[1]} onPress={() => console.warn('Pressed')} />
-            <Task data={data[2]} onPress={() => console.warn('Pressed')} />
-            <TimerDisplay hr={time.hr} min={time.min} sec={time.sec} />
+            {/* <Task data={data[1]} onPress={() => console.warn('Pressed')} /> 
+            toggle ? <Task data={data[2]} onPress={() => console.warn('Pressed')} /> */}
+            <CardWrapper direction={'row'}>
+                <ScrollerInput values={time} setValues={setTime} />
+            </CardWrapper>
+            <TimerDisplay hr={time.hh} min={time.mm} sec={time.ss} />
             <ButtonsWrapper>
                 <CustomButton text={'Stop'} secondary />
                 <CustomButton text={'Pause'} />

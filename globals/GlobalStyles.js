@@ -37,6 +37,10 @@ export const flexBox = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
     },
+    flexJcse: {
+        justifyContent: 'space-evenly',
+        alignItems: 'center',
+    },
 })
 
 export const GlobalStyles = StyleSheet.create({

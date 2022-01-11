@@ -7,8 +7,8 @@ export default styles = StyleSheet.create({
     button: {
         flex: 1,
         backgroundColor: colors.lightBlue,
-        paddingHorizontal: moderateScale(15),
-        paddingVertical: moderateScale(8),
+        paddingHorizontal: moderateScale(16),
+        paddingVertical: moderateScale(10),
         borderRadius: moderateScale(6),
         marginHorizontal: 10,
     },

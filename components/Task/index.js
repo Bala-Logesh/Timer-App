@@ -4,13 +4,14 @@ import styles from './styles'
 import { CardWrapper } from '../../globals/wrappers'
 import { VerticalText, Icons } from './components'
 
-export default function Task({ data, onPress }) {
+export default function Task({ data, onLeftPress, onRightPress }) {
     return (
         <CardWrapper direction={'row'}>
             <Icons
                 side={'left'}
                 completed={data.completed}
                 priority={data.priority}
+                onPress={onLeftPress}
             />
             <View style={styles.taskBody}>
                 <VerticalText
@@ -24,7 +25,11 @@ export default function Task({ data, onPress }) {
                     secondary={data.break}
                 />
             </View>
-            <Icons side={'right'} selected={data.selected} onPress={onPress} />
+            <Icons
+                side={'right'}
+                selected={data.selected}
+                onPress={onRightPress}
+            />
         </CardWrapper>
     )
 }
