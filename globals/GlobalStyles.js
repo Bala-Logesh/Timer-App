@@ -59,6 +59,21 @@ export const GlobalStyles = StyleSheet.create({
         fontWeight: 'bold',
         color: colors.text,
         alignSelf: 'flex-start',
+        marginBottom: moderateScale(10),
+    },
+    subTitle: {
+        fontSize: fontSize.xlarge,
+        fontWeight: 'bold',
+        color: colors.text,
+        alignSelf: 'flex-start',
+        marginBottom: moderateScale(10),
+    },
+    subTitle2: {
+        fontSize: fontSize.large,
+        fontWeight: 'bold',
+        color: colors.text,
+        alignSelf: 'flex-start',
+        marginBottom: moderateScale(10),
     },
     primaryText: {
         fontSize: fontSize.regular,
@@ -67,5 +82,10 @@ export const GlobalStyles = StyleSheet.create({
     secondaryText: {
         fontSize: fontSize.regular,
         color: colors.textLight,
+    },
+    divider: {
+        width: 2,
+        height: '80%',
+        backgroundColor: colors.textLight,
     },
 })

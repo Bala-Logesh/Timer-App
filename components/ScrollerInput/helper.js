@@ -1,13 +1,10 @@
 import { useCallback } from 'react'
 import { View, Text, FlatList } from 'react-native'
 import { fontSize, flexBox, GlobalStyles } from '../../globals/GlobalStyles'
+import { keyExtractor } from '../../globals/utilities'
 import styles from './styles'
 
 const HEIGHT = fontSize.xxxlarge
-
-function keyExtractor(_, index) {
-    return index.toString()
-}
 
 function renderContent({ item }) {
     return (

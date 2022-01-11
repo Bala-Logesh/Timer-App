@@ -16,41 +16,8 @@ export default function Timer() {
         ss: 12,
     })
 
-    const data = [
-        {
-            title: 'Mobile App Design',
-            interval: '1 hr 30 min',
-            tasks: '1/4',
-            break: '25 min',
-            priority: 'High',
-            selected: true,
-            completed: true,
-        },
-        {
-            title: 'Mobile App Design',
-            interval: '1 hr 30 min',
-            tasks: '1/4',
-            break: '25 min',
-            priority: 'Medium',
-            selected: false,
-            completed: true,
-        },
-        {
-            title: 'Mobile App Design',
-            interval: '1 hr 30 min',
-            tasks: '1/4',
-            break: '25 min',
-            priority: 'Low',
-            selected: true,
-            completed: true,
-        },
-    ]
-
     return (
         <ContainerWrapper>
-            <Task data={data[0]} onPress={() => console.warn('Pressed')} />
-            {/* <Task data={data[1]} onPress={() => console.warn('Pressed')} /> 
-            toggle ? <Task data={data[2]} onPress={() => console.warn('Pressed')} /> */}
             <CardWrapper direction={'row'}>
                 <ScrollerInput values={time} setValues={setTime} />
             </CardWrapper>

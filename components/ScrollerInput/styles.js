@@ -19,10 +19,6 @@ export default styles = StyleSheet.create({
         ...flexBox.flex,
         fontSize: fontSize.xxxlarge - moderateScale(6),
         height: fontSize.xxxlarge,
-    },
-    divider: {
-        width: 2,
-        height: '80%',
-        backgroundColor: colors.textLight,
+        marginBottom: 0,
     },
 })

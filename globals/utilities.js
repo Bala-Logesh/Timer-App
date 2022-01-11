@@ -1,4 +1,5 @@
-import { colors } from './GlobalStyles'
+import { View } from 'react-native'
+import { colors, GlobalStyles } from './GlobalStyles'
 
 export const getColor = color => {
     switch (color) {
@@ -25,4 +26,12 @@ export const createArray = (end, start = 0) => {
         arr.push(i)
     }
     return arr
+}
+
+export function keyExtractor(_, index) {
+    return index.toString()
+}
+
+export function Divider() {
+    return <View style={GlobalStyles.divider}></View>
 }
