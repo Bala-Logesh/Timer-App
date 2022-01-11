@@ -1,20 +1,18 @@
-import { View, Text, StyleSheet } from 'react-native'
+import { NavigationContainer } from '@react-navigation/native'
+
+import MainNavigator from './navigators/TabNavigator'
+import { GlobalStyles, colors } from './globals/GlobalStyles'
+import { StatusBar } from 'react-native'
 
 export default function App() {
     return (
-        <View style={styles.container}>
-            <Text style={styles.text}>Hello there</Text>
-        </View>
+        <NavigationContainer style={GlobalStyles.navigationContainer}>
+            <MainNavigator />
+            <StatusBar
+                translucent
+                backgroundColor={colors.darkBg}
+                barStyle='light-content'
+            />
+        </NavigationContainer>
     )
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    text: {
-        fontSize: 26
-    }
-})
