@@ -41,6 +41,14 @@ export const flexBox = StyleSheet.create({
         justifyContent: 'space-evenly',
         alignItems: 'center',
     },
+    flexJcseAifs: {
+        justifyContent: 'space-evenly',
+        alignItems: 'flex-start',
+    },
+    flexJcseAife: {
+        justifyContent: 'space-evenly',
+        alignItems: 'flex-end',
+    },
 })
 
 export const GlobalStyles = StyleSheet.create({

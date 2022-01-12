@@ -6,7 +6,6 @@ import {
 } from '../../globals/wrappers'
 import CustomButton from '../../components/CustomButton'
 import TimerDisplay from '../../components/TimerDisplay'
-import Task from '../../components/Task'
 import ScrollerInput from '../../components/ScrollerInput'
 
 export default function Timer() {

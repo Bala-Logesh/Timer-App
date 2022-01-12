@@ -35,3 +35,18 @@ export function keyExtractor(_, index) {
 export function Divider() {
     return <View style={GlobalStyles.divider}></View>
 }
+
+export const months = [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec',
+]
