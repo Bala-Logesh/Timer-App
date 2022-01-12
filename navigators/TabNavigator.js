@@ -54,9 +54,9 @@ export default function MainNavigator() {
                 tabBarInactiveTintColor: colors.gray,
             })}
         >
-            <Tab.Screen name='Charts' component={ChartsScreen} />
             <Tab.Screen name='Timer' component={TimerScreen} />
             <Tab.Screen name='List' component={StackNavigator} />
+            <Tab.Screen name='Charts' component={ChartsScreen} />
             <Tab.Screen name='Profile' component={PersonalInfoScreen} />
         </Tab.Navigator>
     )
