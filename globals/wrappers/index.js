@@ -1,15 +1,17 @@
-import { View } from 'react-native'
+import { View, useWindowDimensions } from 'react-native'
 import styles from './styles'
 import { colors } from '../GlobalStyles'
 import { moderateScale } from 'react-native-size-matters'
 
 export function ContainerWrapper({ children, noPaddingTop }) {
+    const { height } = useWindowDimensions()
+
     return (
         <View
             style={[
                 styles.container,
                 {
-                    paddingTop: noPaddingTop
+                    paddingTop: noPaddingTop || height < 820
                         ? moderateScale(40)
                         : moderateScale(80),
                 },
