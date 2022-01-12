@@ -1,9 +1,20 @@
 import { View } from 'react-native'
 import styles from './styles'
+import { colors } from '../GlobalStyles'
+import { moderateScale } from 'react-native-size-matters'
 
-export function ContainerWrapper({ children }) {
+export function ContainerWrapper({ children, noPaddingTop }) {
     return (
-        <View style={styles.container}>
+        <View
+            style={[
+                styles.container,
+                {
+                    paddingTop: noPaddingTop
+                        ? moderateScale(40)
+                        : moderateScale(80),
+                },
+            ]}
+        >
             {children}
         </View>
     )
@@ -16,8 +27,9 @@ export function ButtonsWrapper({ children }) {
 export function CardWrapper({
     children,
     direction,
-    ai,
+    ai = 'center',
     flex = 0,
+    noBgColor = false,
 }) {
     return (
         <View
@@ -27,6 +39,7 @@ export function CardWrapper({
                     flexDirection: direction,
                     alignItems: ai,
                     flex,
+                    backgroundColor: noBgColor ? null : colors.lightBg,
                 },
             ]}
         >

@@ -36,6 +36,10 @@ export function Divider() {
     return <View style={GlobalStyles.divider}></View>
 }
 
+export function capitalize(input) {
+    return input.charAt(0).toUpperCase() + input.slice(1)
+}
+
 export const months = [
     'Jan',
     'Feb',

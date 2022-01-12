@@ -8,7 +8,6 @@ export default styles = StyleSheet.create({
         flex: 1,
         backgroundColor: colors.darkBg,
         padding: moderateScale(10),
-        paddingTop: moderateScale(80),
     },
     buttonContainer: {
         flexDirection: 'row',
@@ -16,8 +15,6 @@ export default styles = StyleSheet.create({
     },
     cardContainer: {
         width: '100%',
-        alignItems: 'center',
-        backgroundColor: colors.lightBg,
         paddingHorizontal: moderateScale(16),
         paddingVertical: moderateScale(10),
         borderRadius: scale(10),

@@ -22,7 +22,7 @@ export default function Chart({ title, chartName, data }) {
             >
                 {title}
             </Text>
-            <CardWrapper flex={1}>
+            <CardWrapper flex={1} ai={'stretch'}>
                 <Text
                     style={[
                         GlobalStyles.secondaryText,

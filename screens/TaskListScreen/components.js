@@ -17,6 +17,7 @@ export default function TaskListContainer({
             {value && (
                 <FlatList
                     data={data}
+                    showsVerticalScrollIndicator={false}
                     keyExtractor={keyExtractor}
                     renderItem={({ item }) => (
                         <Task
