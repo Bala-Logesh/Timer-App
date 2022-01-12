@@ -29,12 +29,12 @@ export default function Charts() {
                 />
             </ButtonsWrapper>
             <Chart
-                title={'All Tasks'}
+                title={`All Tasks - ${selectedYear}`}
                 chartName={'No. of Tasks vs Month'}
                 data={createArray(13, 1)}
             />
             <Chart
-                title={'Completed'}
+                title={`Completed - ${selectedYear}`}
                 chartName={'No. of Completed Tasks vs Month'}
                 data={createArray(13, 1)}
             />
