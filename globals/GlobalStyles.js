@@ -52,6 +52,11 @@ export const flexBox = StyleSheet.create({
 })
 
 export const GlobalStyles = StyleSheet.create({
+    tabIcon: {
+        ...flexBox.flex,
+        textAlign: 'center',
+        width: 50,
+    },
     navigationContainer: {
         ...flexBox.flex,
         backgroundColor: colors.darkBg,

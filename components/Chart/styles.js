@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Platform } from 'react-native'
 import { colors, fontSize, flexBox } from '../../globals/GlobalStyles'
 import { moderateScale } from 'react-native-size-matters'
 
@@ -19,7 +19,7 @@ export default styles = StyleSheet.create({
         marginVertical: moderateScale(10),
     },
     line: {
-        width: 4,
+        width: Platform.isPad ? 10 : 4,
         height: 100,
         borderRadius: moderateScale(2),
         marginTop: moderateScale(4),

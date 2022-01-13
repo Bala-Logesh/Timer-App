@@ -6,7 +6,8 @@ import StackNavigator from './StackNavigator'
 import TimerScreen from '../screens/TimerScreen'
 import ChartsScreen from '../screens/ChartsScreen'
 import PersonalInfoScreen from '../screens/PersonalInfoScreen'
-import { colors } from '../globals/GlobalStyles'
+import { colors, GlobalStyles } from '../globals/GlobalStyles'
+import { Platform } from 'react-native'
 
 const Tab = createBottomTabNavigator()
 
@@ -20,6 +21,7 @@ export default function MainNavigator() {
                 tabBarStyle: {
                     backgroundColor: colors.lightBg,
                     borderTopColor: colors.lightBg,
+                    height: Platform.isPad ? 100 : moderateScale(50),
                 },
                 tabBarIcon: ({ _, color, size }) => {
                     let iconName
@@ -47,6 +49,7 @@ export default function MainNavigator() {
                             name={iconName}
                             color={color}
                             size={moderateScale(size)}
+                            style={GlobalStyles.tabIcon}
                         />
                     )
                 },
