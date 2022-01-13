@@ -13,6 +13,10 @@ export default styles = StyleSheet.create({
         flexDirection: 'row',
         marginBottom: moderateScale(14),
     },
+    titleContainer: {
+        marginVertical: moderateScale(6),
+        marginTop: moderateScale(14),
+    },
     cardContainer: {
         width: '100%',
         paddingHorizontal: moderateScale(16),

@@ -7,6 +7,7 @@ import { CardWrapper } from '../../globals/wrappers'
 
 export default function CustomInput({
     title,
+    showTitle = true,
     placeHolder = title,
     value,
     setValue,
@@ -19,7 +20,7 @@ export default function CustomInput({
 
     return (
         <View>
-            {title && (
+            {title && showTitle && (
                 <Text style={GlobalStyles.secondaryText}>
                     {title && capitalize(title)}
                 </Text>

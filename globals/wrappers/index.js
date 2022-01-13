@@ -1,6 +1,6 @@
-import { View, useWindowDimensions } from 'react-native'
+import { View, Text, useWindowDimensions } from 'react-native'
 import styles from './styles'
-import { colors } from '../GlobalStyles'
+import { colors, GlobalStyles } from '../GlobalStyles'
 import { moderateScale } from 'react-native-size-matters'
 
 export function ContainerWrapper({ children, noPaddingTop }) {
@@ -11,9 +11,10 @@ export function ContainerWrapper({ children, noPaddingTop }) {
             style={[
                 styles.container,
                 {
-                    paddingTop: noPaddingTop || height < 820
-                        ? moderateScale(40)
-                        : moderateScale(80),
+                    paddingTop:
+                        noPaddingTop || height < 820
+                            ? moderateScale(40)
+                            : moderateScale(80),
                 },
             ]}
         >
@@ -24,6 +25,15 @@ export function ContainerWrapper({ children, noPaddingTop }) {
 
 export function ButtonsWrapper({ children }) {
     return <View style={styles.buttonContainer}>{children}</View>
+}
+
+export function TitleWrapper({ children, title }) {
+    return (
+        <View style={styles.titleContainer}>
+            <Text style={GlobalStyles.subTitle2}>{title}</Text>
+            {children}
+        </View>
+    )
 }
 
 export function CardWrapper({
