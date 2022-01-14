@@ -21,7 +21,11 @@ export default function MainNavigator() {
                 tabBarStyle: {
                     backgroundColor: colors.lightBg,
                     borderTopColor: colors.lightBg,
-                    height: Platform.isPad ? 100 : moderateScale(50),
+                    height: Platform.isPad
+                        ? 100
+                        : Platform.OS === 'ios'
+                        ? moderateScale(70)
+                        : moderateScale(50),
                 },
                 tabBarIcon: ({ _, color, size }) => {
                     let iconName
