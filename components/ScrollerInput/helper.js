@@ -1,4 +1,4 @@
-import { useCallback } from 'react'
+import { useCallback, useEffect } from 'react'
 import { View, Text, FlatList } from 'react-native'
 import { fontSize, flexBox, GlobalStyles } from '../../globals/GlobalStyles'
 import { keyExtractor } from '../../globals/utilities'
@@ -10,7 +10,7 @@ function renderContent({ item }) {
     return (
         <View style={[flexBox.flex]}>
             <Text style={[GlobalStyles.title, styles.scrollerText]}>
-                {item < 10 ? `0${item}` : item}
+                {item === '' ? null : item < 10 ? `0${item}` : item}
             </Text>
         </View>
     )
@@ -24,7 +24,7 @@ function getItemLayout(_, index) {
     }
 }
 
-function Scroller({ name, index, data, setIndex }) {
+function Scroller({ name, index, data, setIndex, reset }) {
     let refFlatList = null
 
     const handleVieweableItemsChanged = useCallback(function ({
@@ -37,15 +37,18 @@ function Scroller({ name, index, data, setIndex }) {
         } else {
             item = viewableItems[0]
         }
-        if (item?.index !== index) {
-            setIndex(prev => ({ ...prev, [name]: item?.index }))
-        }
+        setIndex(prev => ({ ...prev, [name]: item?.index }))
+        refFlatList && refFlatList.scrollToIndex({ index })
     },
     [])
 
     function scrollToItem() {
-        refFlatList.scrollToIndex({ index })
+        refFlatList && refFlatList.scrollToIndex({ index })
     }
+
+    useEffect(() => {
+        refFlatList.scrollToIndex({ index: 0 })
+    }, [reset])
 
     return (
         <View style={styles.scrollerList}>
