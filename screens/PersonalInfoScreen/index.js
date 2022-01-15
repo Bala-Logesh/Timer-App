@@ -16,6 +16,11 @@ export default function PersonalInfo() {
         gender: '',
     })
 
+    const onPressHandler = () => {
+        edit && console.log(data)
+        setEdit(!edit)
+    }
+
     return (
         <ContainerWrapper noPaddingTop>
             <KeyboardAvoidingView
@@ -38,8 +43,8 @@ export default function PersonalInfo() {
                     </Pressable>
                     <ButtonsWrapper>
                         <CustomButton
-                            text={'Edit Profile'}
-                            onPress={() => setEdit(!edit)}
+                            text={edit ? 'Save Profile' : 'Edit Profile'}
+                            onPress={() => onPressHandler()}
                         />
                     </ButtonsWrapper>
                 </View>

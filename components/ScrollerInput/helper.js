@@ -2,6 +2,7 @@ import { useCallback, useEffect } from 'react'
 import { View, Text, FlatList } from 'react-native'
 import { fontSize, flexBox, GlobalStyles } from '../../globals/GlobalStyles'
 import { keyExtractor } from '../../globals/utilities'
+import { setTimerAction } from '../../reducers'
 import styles from './styles'
 
 const HEIGHT = fontSize.xxxlarge
@@ -37,7 +38,7 @@ function Scroller({ name, index, data, setIndex, reset }) {
         } else {
             item = viewableItems[0]
         }
-        setIndex(prev => ({ ...prev, [name]: item?.index }))
+        setIndex(setTimerAction({ [name]: item?.index }))
         refFlatList && refFlatList.scrollToIndex({ index })
     },
     [])
@@ -45,6 +46,10 @@ function Scroller({ name, index, data, setIndex, reset }) {
     function scrollToItem() {
         refFlatList && refFlatList.scrollToIndex({ index })
     }
+
+    useEffect(() => {
+        refFlatList.scrollToIndex({ index })
+    }, [])
 
     useEffect(() => {
         refFlatList.scrollToIndex({ index: 0 })

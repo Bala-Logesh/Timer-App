@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import {
     ContainerWrapper,
     ButtonsWrapper,
@@ -7,13 +7,13 @@ import {
 import CustomButton from '../../components/CustomButton'
 import TimerDisplay from '../../components/TimerDisplay'
 import ScrollerInput from '../../components/ScrollerInput'
+import { DataContext } from '../../context'
+import { setTimerAction, resetTimerAction } from '../../reducers'
 
 export default function Timer() {
-    const [time, setTime] = useState({
-        hh: 0,
-        mm: 0,
-        ss: 0,
-    })
+    const {
+        timer: { state, dispatch },
+    } = useContext(DataContext)
 
     const [intervalRef, setIntervalRef] = useState(null)
     const [isPaused, setIsPaused] = useState(true)
@@ -27,9 +27,9 @@ export default function Timer() {
         isPaused && setIntervalRef(setInterval(run, 1000))
     }
 
-    let updatedS = time.ss
-    let updatedM = time.mm
-    let updatedH = time.hh
+    let updatedS = state.ss
+    let updatedM = state.mm
+    let updatedH = state.hh
 
     const run = () => {
         if (updatedM === 0 && updatedS === 0) {
@@ -51,7 +51,7 @@ export default function Timer() {
         } else if (updatedS !== 0) {
             updatedS--
         }
-        setTime(prev => ({ ...prev, hh: updatedH, mm: updatedM, ss: updatedS }))
+        dispatch(setTimerAction({ hh: updatedH, mm: updatedM, ss: updatedS }))
     }
 
     const pauseTimer = () => {
@@ -67,7 +67,7 @@ export default function Timer() {
 
     const resetTimer = () => {
         setReset(true)
-        setTime(prev => ({ ...prev, hh: 0, mm: 0, ss: 0 }))
+        dispatch(resetTimerAction())
         setIsStopped(false)
         setTimeout(() => setReset(false), 1000)
     }
@@ -75,10 +75,14 @@ export default function Timer() {
     return (
         <ContainerWrapper>
             <CardWrapper direction={'row'}>
-                <ScrollerInput values={time} setValues={setTime} reset={reset} />
+                <ScrollerInput
+                    values={state}
+                    setValues={dispatch}
+                    reset={reset}
+                />
             </CardWrapper>
 
-            <TimerDisplay hr={time.hh} min={time.mm} sec={time.ss} />
+            <TimerDisplay hr={state.hh} min={state.mm} sec={state.ss} />
             <ButtonsWrapper>
                 <CustomButton
                     text={isStopped ? 'Reset' : 'Stop'}
