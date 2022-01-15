@@ -3,6 +3,7 @@ import PersonalInfoReducer, {
     initialPersonalInfoState,
 } from '../reducers/PersonalInfoReducer'
 import TimerReducer, { initialTimerState } from '../reducers/TimerReducer'
+import TaskReducer, { initialTaskState } from '../reducers/TaskReducer'
 
 export const DataContext = createContext()
 
@@ -12,6 +13,7 @@ const ContextProviderWrapper = ({ children }) => {
         PersonalInfoReducer,
         initialPersonalInfoState
     )
+    const TaskOp = useReducer(TaskReducer, initialTaskState)
 
     return (
         <DataContext.Provider
@@ -20,6 +22,10 @@ const ContextProviderWrapper = ({ children }) => {
                 personalInfo: {
                     state: PersonalInfoOp[0],
                     dispatch: PersonalInfoOp[1],
+                },
+                task: {
+                    state: TaskOp[0],
+                    dispatch: TaskOp[1],
                 },
             }}
         >

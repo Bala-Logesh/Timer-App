@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { Pressable, Text, ScrollView } from 'react-native'
 import {
     ContainerWrapper,
@@ -13,8 +13,14 @@ import CustomInput from '../../components/CustomInput'
 import styles from './styles'
 import { PriorityButton, IntervalScroller } from './components'
 import { priorities, intervals } from './extras'
+import { DataContext } from '../../context'
+import { addTaskAction } from '../../reducers'
 
 export default function TaskForm({ navigation }) {
+    const {
+        task: { state, dispatch },
+    } = useContext(DataContext)
+
     const [formData, setFormData] = useState({
         name: '',
         description: '',
@@ -23,10 +29,12 @@ export default function TaskForm({ navigation }) {
         workIntervalHH: 0,
         workIntervalMM: 0,
         break: 0,
+        completed: false,
     })
 
     const onPressHandler = () => {
-        console.log(formData);
+        dispatch(addTaskAction(formData))
+        navigation.goBack()
     }
 
     return (
@@ -98,7 +106,10 @@ export default function TaskForm({ navigation }) {
                     </CardWrapper>
                 </TitleWrapper>
                 <ButtonsWrapper>
-                    <CustomButton text={'Save the task'} onPress={onPressHandler} />
+                    <CustomButton
+                        text={'Save the task'}
+                        onPress={onPressHandler}
+                    />
                 </ButtonsWrapper>
             </ScrollView>
         </ContainerWrapper>
