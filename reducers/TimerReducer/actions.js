@@ -8,7 +8,6 @@ export const setTimerAction = timeValues => {
 }
 
 export const resetTimerAction = () => {
-    console.log('called')
     return {
         type: types.RESET_COUNTER,
     }

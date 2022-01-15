@@ -25,7 +25,7 @@ function getItemLayout(_, index) {
     }
 }
 
-function Scroller({ name, index, data, setIndex, reset }) {
+function Scroller({ name, index, data, dispatch, reset }) {
     let refFlatList = null
 
     const handleVieweableItemsChanged = useCallback(function ({
@@ -38,7 +38,7 @@ function Scroller({ name, index, data, setIndex, reset }) {
         } else {
             item = viewableItems[0]
         }
-        setIndex(setTimerAction({ [name]: item?.index }))
+        dispatch(setTimerAction({ [name]: item?.index }))
         refFlatList && refFlatList.scrollToIndex({ index })
     },
     [])

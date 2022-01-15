@@ -77,7 +77,7 @@ export default function Timer() {
             <CardWrapper direction={'row'}>
                 <ScrollerInput
                     values={state}
-                    setValues={dispatch}
+                    dispatch={dispatch}
                     reset={reset}
                 />
             </CardWrapper>

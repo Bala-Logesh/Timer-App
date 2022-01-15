@@ -3,14 +3,14 @@ import { createArray, Divider } from '../../globals/utilities'
 import Scroller from './helper'
 import styles from './styles'
 
-export default function ScrollerInput({ values, setValues, reset }) {
+export default function ScrollerInput({ values, dispatch, reset }) {
     return (
         <View style={styles.scrollerContainer}>
             <Scroller
                 data={createArray(24)}
                 name={'hh'}
                 index={values['hh']}
-                setIndex={setValues}
+                dispatch={dispatch}
                 reset={reset}
             />
             <Divider />
@@ -18,7 +18,7 @@ export default function ScrollerInput({ values, setValues, reset }) {
                 data={createArray(60)}
                 name={'mm'}
                 index={values['mm']}
-                setIndex={setValues}
+                dispatch={dispatch}
                 reset={reset}
             />
             <Divider />
@@ -26,7 +26,7 @@ export default function ScrollerInput({ values, setValues, reset }) {
                 data={createArray(60)}
                 name={'ss'}
                 index={values['ss']}
-                setIndex={setValues}
+                dispatch={dispatch}
                 reset={reset}
             />
         </View>
