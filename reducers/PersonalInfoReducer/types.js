@@ -1,0 +1,1 @@
+export const SAVE_PERSONAL_DATA = 'SAVE_PERSONAL_DATA'

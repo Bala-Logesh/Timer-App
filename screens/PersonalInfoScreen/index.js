@@ -1,23 +1,24 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { View, Pressable, Image, KeyboardAvoidingView } from 'react-native'
 import { ContainerWrapper, ButtonsWrapper } from '../../globals/wrappers'
 import CustomButton from '../../components/CustomButton'
 import styles from './styles'
 import { flexBox } from '../../globals/GlobalStyles'
 import { ProfileForm } from './components'
+import { DataContext } from '../../context'
+import { savePersonalInfoAction } from '../../reducers'
 
 export default function PersonalInfo() {
+    const {
+        personalInfo: { state, dispatch },
+    } = useContext(DataContext)
+
     const [image, setImage] = useState(false)
     const [edit, setEdit] = useState(false)
-    const [data, setData] = useState({
-        name: '',
-        email: '',
-        age: '',
-        gender: '',
-    })
+    const [data, setData] = useState(state)
 
     const onPressHandler = () => {
-        edit && console.log(data)
+        edit && dispatch(savePersonalInfoAction(data))
         setEdit(!edit)
     }
 
