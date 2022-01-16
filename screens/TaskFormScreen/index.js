@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import { Pressable, Text, ScrollView, View, Platform } from 'react-native'
 import {
     ContainerWrapper,
@@ -14,33 +14,27 @@ import { fontSize, colors, GlobalStyles } from '../../globals/GlobalStyles'
 import CustomInput from '../../components/CustomInput'
 import styles from './styles'
 import { PriorityButton, IntervalScroller } from './components'
-import { priorities, intervals } from './extras'
+import { priorities, intervals, initialFormData } from './extras'
 import { DataContext } from '../../context'
-import { addTaskAction } from '../../reducers'
+import { addTaskAction, editTaskAction } from '../../reducers'
 
-export default function TaskForm({ navigation }) {
+export default function TaskForm({ route, navigation }) {
     const {
         task: { state, dispatch },
     } = useContext(DataContext)
 
-    const [formData, setFormData] = useState({
-        name: '',
-        description: '',
-        priority: 'Low',
-        taskInterval: 0,
-        workIntervalHH: 0,
-        workIntervalMM: 0,
-        break: 0,
-        completed: false,
-        selected: false,
-        completedIntervals: 0,
-        completionDate: null,
-        date: moment(new Date()).format('DD/MM/YYYY'),
-        time: moment(new Date()).format('hh:mm A'),
-    })
+    const [editTask, setEditTask] = useState(false)
+    const [formData, setFormData] = useState(initialFormData)
     const [dateTime, setDateTime] = useState(new Date())
     const [mode, setMode] = useState('date')
     const [show, setShow] = useState(false)
+
+    useEffect(() => {
+        if (route.params?.id) {
+            setFormData(state.tasks.find(task => task.id === route.params.id))
+            setEditTask(true)
+        }
+    }, [])
 
     const onChange = (event, selectedDate) => {
         if (event.type === 'set' || Platform.OS === 'ios') {
@@ -55,7 +49,12 @@ export default function TaskForm({ navigation }) {
     }
 
     const onPressHandler = () => {
-        dispatch(addTaskAction(formData))
+        if (editTask) {
+            dispatch(editTaskAction(formData))
+            setEditTask(false)
+        } else {
+            dispatch(addTaskAction(formData))
+        }
         navigation.goBack()
     }
 
@@ -177,7 +176,7 @@ export default function TaskForm({ navigation }) {
                 </TitleWrapper>
                 <ButtonsWrapper>
                     <CustomButton
-                        text={'Save the task'}
+                        text={`${editTask ? 'Edit' : 'Save'} the task`}
                         onPress={onPressHandler}
                     />
                 </ButtonsWrapper>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { View } from 'react-native'
+import { Pressable } from 'react-native'
 import styles from './styles'
 import { CardWrapper } from '../../globals/wrappers'
 import { VerticalText, Icons } from './components'
@@ -27,7 +27,12 @@ export default function Task({ data, dispatch, navigation }) {
                 priority={data.priority}
                 onPress={onLeftPress}
             />
-            <View style={styles.taskBody}>
+            <Pressable
+                style={styles.taskBody}
+                onLongPress={() => {
+                    navigation.navigate('Form', { id: data.id })
+                }}
+            >
                 <VerticalText
                     alignment={'flex-start'}
                     primary={data.name}
@@ -38,7 +43,7 @@ export default function Task({ data, dispatch, navigation }) {
                     primary={`${data.completedIntervals}/${data.taskInterval}`}
                     secondary={`${data.break} min`}
                 />
-            </View>
+            </Pressable>
             <Icons
                 navigation={navigation}
                 side={'right'}

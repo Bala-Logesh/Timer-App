@@ -27,7 +27,6 @@ const TaskReducer = (state = initialTaskState, action) => {
     switch (action.type) {
         case types.ADD_TASK:
             state = { ...state, tasks: [action.payload, ...state.tasks] }
-            console.log(state)
             return state
         case types.SELECT_TASK: {
             let selTask = state.tasks.find(t => t.id === action.payload)
@@ -70,7 +69,7 @@ const TaskReducer = (state = initialTaskState, action) => {
             return {
                 ...state,
                 tasks: state.tasks.map(task => {
-                    if (task.id !== action.payload.id) {
+                    if (task.id === action.payload.id) {
                         return action.payload
                     } else {
                         return task

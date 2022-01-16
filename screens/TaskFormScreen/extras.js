@@ -1,3 +1,5 @@
+import moment from "moment"
+
 export const priorities = ['High', 'Medium', 'Low']
 
 export const intervals = [
@@ -30,3 +32,19 @@ export const intervals = [
         name: 'break',
     },
 ]
+
+export const initialFormData = {
+    name: '',
+    description: '',
+    priority: 'Low',
+    taskInterval: 0,
+    workIntervalHH: 0,
+    workIntervalMM: 0,
+    break: 0,
+    completed: false,
+    selected: false,
+    completedIntervals: 0,
+    completionDate: null,
+    date: moment(new Date()).format('DD/MM/YYYY'),
+    time: moment(new Date()).format('hh:mm A'),
+}
