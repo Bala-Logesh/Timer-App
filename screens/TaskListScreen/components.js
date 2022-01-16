@@ -10,6 +10,7 @@ export default function TaskListContainer({
     flex = 1,
     value,
     setValue,
+    dispatch,
 }) {
     return (
         <View style={[styles.list, { flex }]}>
@@ -20,10 +21,7 @@ export default function TaskListContainer({
                     showsVerticalScrollIndicator={false}
                     keyExtractor={keyExtractor}
                     renderItem={({ item }) => (
-                        <Task
-                            data={item}
-                            onPress={() => console.warn('Pressed')}
-                        />
+                        <Task data={item} dispatch={dispatch} />
                     )}
                 />
             )}

@@ -14,6 +14,20 @@ export const editTaskAction = editedTask => {
     }
 }
 
+export const selectTaskAction = taskId => {
+    return {
+        type: types.SELECT_TASK,
+        payload: taskId,
+    }
+}
+
+export const completeTaskAction = taskId => {
+    return {
+        type: types.COMPLETE_TASK,
+        payload: taskId,
+    }
+}
+
 export const deleteTaskAction = id => {
     return {
         type: types.DELETE_TASK,

@@ -32,6 +32,7 @@ export default function TaskForm({ navigation }) {
         workIntervalMM: 0,
         break: 0,
         completed: false,
+        completedIntervals: 0,
         date: moment(new Date()).format('DD/MM/YYYY'),
         time: moment(new Date()).format('hh:mm A'),
     })
@@ -40,7 +41,6 @@ export default function TaskForm({ navigation }) {
     const [show, setShow] = useState(false)
 
     const onChange = (event, selectedDate) => {
-        console.log(event)
         if (event.type === 'set' || Platform.OS === 'ios') {
             let date = moment(selectedDate).format('DD/MM/YYYY')
             let time = moment(selectedDate).format('hh:mm A')

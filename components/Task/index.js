@@ -3,8 +3,17 @@ import { View } from 'react-native'
 import styles from './styles'
 import { CardWrapper } from '../../globals/wrappers'
 import { VerticalText, Icons } from './components'
+import { completeTaskAction, selectTaskAction } from '../../reducers'
 
-export default function Task({ data, onLeftPress, onRightPress }) {
+export default function Task({ data, dispatch }) {
+    const onLeftPress = () => {
+        dispatch(completeTaskAction(data.id))
+    }
+
+    const onRightPress = () => {
+        dispatch(selectTaskAction(data.id))
+    }
+
     return (
         <CardWrapper direction={'row'}>
             <Icons
@@ -16,13 +25,13 @@ export default function Task({ data, onLeftPress, onRightPress }) {
             <View style={styles.taskBody}>
                 <VerticalText
                     alignment={'flex-start'}
-                    primary={data.title}
-                    secondary={data.interval}
+                    primary={data.name}
+                    secondary={`${data.workIntervalHH} hr ${data.workIntervalMM} min`}
                 />
                 <VerticalText
                     alignment={'flex-end'}
-                    primary={data.tasks}
-                    secondary={data.break}
+                    primary={`${data.completedIntervals}/${data.taskInterval}`}
+                    secondary={`${data.break} min`}
                 />
             </View>
             <Icons

@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { Text, View, Pressable } from 'react-native'
+import { useState, useContext } from 'react'
+import { Text, View } from 'react-native'
 import {
     ContainerWrapper,
     ButtonsWrapper,
@@ -10,6 +10,7 @@ import styles from './styles'
 import { GlobalStyles } from '../../globals/GlobalStyles'
 import { Divider } from '../../globals/utilities'
 import TaskListContainer, { HorizontalText } from './components'
+import { DataContext } from '../../context'
 
 const data = [
     {
@@ -45,32 +46,60 @@ export default function TaskList({ navigation }) {
     const [showAllTasks, setShowAllTasks] = useState(true)
     const [showCompletedTasks, setShowCompletedTasks] = useState(true)
 
+    const {
+        task: { state, dispatch },
+    } = useContext(DataContext)
+
+    let notCompletedTasks = state.tasks.filter(task => task.completed !== true)
+    let completedTasks = state.tasks.filter(task => task.completed === true)
+
+    const calcHours = () => {
+        let totalMinutes = state.tasks.reduce((previousValue, task) => {
+            if (task.completed === true) {
+                return previousValue
+            } else {
+                return (
+                    previousValue +
+                    task.workIntervalMM +
+                    task.workIntervalHH * 60
+                )
+            }
+        }, 0)
+        console.log(totalMinutes);
+        const minutes = totalMinutes % 60
+        const hours = (totalMinutes - minutes) / 60
+        console.log(hours, minutes)
+        return `${hours}:${minutes}`
+    }
+
     return (
         <ContainerWrapper>
             <Text style={GlobalStyles.title}>Today</Text>
             <CardWrapper direction={'row'}>
                 <HorizontalText
-                    primary={15.45}
+                    primary={calcHours()}
                     secondary={'Estimated\nTime(h)'}
                 />
                 <Divider />
                 <HorizontalText
-                    primary={4}
+                    primary={state.tasks.length}
                     secondary={'Total task\nin project'}
                 />
             </CardWrapper>
             <View style={styles.taskListContainer}>
                 <TaskListContainer
-                    data={data}
+                    data={notCompletedTasks}
                     title={'All Tasks'}
                     flex={1.6}
                     value={showAllTasks}
+                    dispatch={dispatch}
                     setValue={setShowAllTasks}
                 />
                 <TaskListContainer
-                    data={data}
+                    data={completedTasks}
                     title={'Completed'}
                     value={showCompletedTasks}
+                    dispatch={dispatch}
                     setValue={setShowCompletedTasks}
                 />
             </View>
