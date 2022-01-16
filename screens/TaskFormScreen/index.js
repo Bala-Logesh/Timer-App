@@ -16,7 +16,7 @@ import styles from './styles'
 import { PriorityButton, IntervalScroller } from './components'
 import { priorities, intervals, initialFormData } from './extras'
 import { DataContext } from '../../context'
-import { addTaskAction, editTaskAction } from '../../reducers'
+import { addTaskAction, editTaskAction, deleteTaskAction } from '../../reducers'
 
 export default function TaskForm({ route, navigation }) {
     const {
@@ -54,6 +54,14 @@ export default function TaskForm({ route, navigation }) {
             setEditTask(false)
         } else {
             dispatch(addTaskAction(formData))
+        }
+        navigation.goBack()
+    }
+
+    const onPressDeleteHandler = () => {
+        if (editTask) {
+            dispatch(deleteTaskAction(formData.id))
+            setEditTask(false)
         }
         navigation.goBack()
     }
@@ -179,6 +187,13 @@ export default function TaskForm({ route, navigation }) {
                         text={`${editTask ? 'Edit' : 'Save'} the task`}
                         onPress={onPressHandler}
                     />
+                    {editTask && (
+                        <CustomButton
+                            deleteBtn
+                            text={'Delete the task'}
+                            onPress={onPressDeleteHandler}
+                        />
+                    )}
                 </ButtonsWrapper>
             </ScrollView>
         </ContainerWrapper>

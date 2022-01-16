@@ -15,6 +15,9 @@ export default styles = StyleSheet.create({
     buttonSecondary: {
         backgroundColor: colors.darkBlue,
     },
+    buttonDelete: {
+        backgroundColor: colors.red,
+    },
     buttonText: {
         color: colors.text,
         fontSize: fontSize.regular,
@@ -22,5 +25,8 @@ export default styles = StyleSheet.create({
     },
     buttonTextSecondary: {
         color: colors.lightBlue,
+    },
+    buttonTextDelete: {
+        color: colors.text,
     },
 })
