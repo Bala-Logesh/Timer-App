@@ -3,7 +3,7 @@ import * as types from './types'
 export const addTaskAction = task => {
     return {
         type: types.ADD_TASK,
-        payload: {...task, id: Date.now().toString()},
+        payload: { ...task, id: Date.now().toString(), createdAt: Date.now()},
     }
 }
 

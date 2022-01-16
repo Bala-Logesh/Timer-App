@@ -4,34 +4,21 @@ export const initialTaskState = {
     task: null,
     tasks: [
         {
-            break: 25,
-            completed: false,
-            selected: false,
-            completedIntervals: 0,
-            date: '16/01/2022',
-            description: 'Task2',
-            id: '1642317675174',
-            name: 'Task2',
-            priority: 'High',
-            taskInterval: 10,
-            time: '12:50 PM',
-            workIntervalHH: 23,
-            workIntervalMM: 59,
-        },
-        {
             break: 0,
-            completed: true,
-            selected: false,
+            completed: false,
             completedIntervals: 0,
+            completionDate: null,
+            createdAt: 1642351441997,
             date: '16/01/2022',
-            description: 'Title',
-            id: '1642317598655',
-            name: 'Title',
+            description: '',
+            id: '1642351441997',
+            name: 'Test',
             priority: 'Low',
-            taskInterval: 2,
-            time: '12:49 PM',
-            workIntervalHH: 10,
-            workIntervalMM: 20,
+            selected: false,
+            taskInterval: 0,
+            time: '10:13 PM',
+            workIntervalHH: 0,
+            workIntervalMM: 0,
         },
     ],
 }
@@ -68,7 +55,11 @@ const TaskReducer = (state = initialTaskState, action) => {
                 ...state,
                 tasks: state.tasks.map(task => {
                     if (task.id === action.payload) {
-                        return { ...task, completed: !task.completed }
+                        return {
+                            ...task,
+                            completed: !task.completed,
+                            completionDate: task.completed ? null : Date.now(),
+                        }
                     } else {
                         return task
                     }

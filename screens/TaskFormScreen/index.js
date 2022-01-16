@@ -34,6 +34,7 @@ export default function TaskForm({ navigation }) {
         completed: false,
         selected: false,
         completedIntervals: 0,
+        completionDate: null,
         date: moment(new Date()).format('DD/MM/YYYY'),
         time: moment(new Date()).format('hh:mm A'),
     })
