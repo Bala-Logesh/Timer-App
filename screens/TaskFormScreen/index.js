@@ -1,11 +1,13 @@
 import { useState, useContext } from 'react'
-import { Pressable, Text, ScrollView } from 'react-native'
+import { Pressable, Text, ScrollView, View, Platform } from 'react-native'
 import {
     ContainerWrapper,
     CardWrapper,
     ButtonsWrapper,
     TitleWrapper,
 } from '../../globals/wrappers'
+import DateTimePicker from '@react-native-community/datetimepicker'
+import moment from 'moment'
 import CustomButton from '../../components/CustomButton'
 import { MaterialIcons } from '@expo/vector-icons'
 import { fontSize, colors, GlobalStyles } from '../../globals/GlobalStyles'
@@ -30,11 +32,38 @@ export default function TaskForm({ navigation }) {
         workIntervalMM: 0,
         break: 0,
         completed: false,
+        date: moment(new Date()).format('DD/MM/YYYY'),
+        time: moment(new Date()).format('hh:mm A'),
     })
+    const [dateTime, setDateTime] = useState(new Date())
+    const [mode, setMode] = useState('date')
+    const [show, setShow] = useState(false)
+
+    const onChange = (event, selectedDate) => {
+        console.log(event)
+        if (event.type === 'set' || Platform.OS === 'ios') {
+            let date = moment(selectedDate).format('DD/MM/YYYY')
+            let time = moment(selectedDate).format('hh:mm A')
+            let value = mode === 'date' ? date : time
+            setFormData(prev => ({ ...prev, [mode]: value }))
+            const currentDate = selectedDate || date
+            setDateTime(currentDate)
+            setShow(false)
+        }
+    }
 
     const onPressHandler = () => {
         dispatch(addTaskAction(formData))
         navigation.goBack()
+    }
+
+    const showMode = currentMode => {
+        setShow(true)
+        setMode(currentMode)
+    }
+
+    const modeChangeHandler = modeToShow => {
+        showMode(modeToShow)
     }
 
     return (
@@ -89,6 +118,45 @@ export default function TaskForm({ navigation }) {
                         ))}
                     </CardWrapper>
                 </TitleWrapper>
+                <TitleWrapper title={'Date and Time'}>
+                    <ButtonsWrapper>
+                        <CustomInput
+                            value={formData.date}
+                            showTitle={false}
+                            editable={false}
+                            flex
+                        />
+                        <CustomInput
+                            value={formData.time}
+                            showTitle={false}
+                            editable={false}
+                            flex
+                        />
+                    </ButtonsWrapper>
+                    <ButtonsWrapper>
+                        <CustomButton
+                            text={'Pick a date'}
+                            onPress={() => modeChangeHandler('date')}
+                        />
+                        <CustomButton
+                            text={'Pick a time'}
+                            secondary
+                            onPress={() => modeChangeHandler('time')}
+                        />
+                    </ButtonsWrapper>
+                </TitleWrapper>
+                <View>
+                    {show && (
+                        <DateTimePicker
+                            testID='dateTimePicker'
+                            value={dateTime}
+                            mode={mode}
+                            is24Hour={true}
+                            display='default'
+                            onChange={onChange}
+                        />
+                    )}
+                </View>
                 <TitleWrapper title={'Interval Settings'}>
                     <CardWrapper>
                         {intervals.map((item, index) => (

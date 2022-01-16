@@ -13,13 +13,14 @@ export default function CustomInput({
     setValue,
     editable = false,
     keyboard = 'default',
+    flex,
 }) {
     const onChangeTextHandler = value => {
         setValue(prevData => ({ ...prevData, [title]: value }))
     }
 
     return (
-        <View>
+        <View style={{ flex: flex ? 1 : 0 }}>
             {title && showTitle && (
                 <Text style={GlobalStyles.secondaryText}>
                     {title && capitalize(title)}
