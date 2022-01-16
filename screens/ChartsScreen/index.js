@@ -24,7 +24,7 @@ export default function Charts() {
         let year = date.getFullYear()
         let month = date.getMonth() + 1
 
-        if (task.completed) {
+        if (!task.completed) {
             if (!active[year]) {
                 active = { ...active, [year]: {} }
             }
