@@ -11,6 +11,7 @@ export default function TaskListContainer({
     value,
     setValue,
     dispatch,
+    navigation,
 }) {
     return (
         <View style={[styles.list, { flex }]}>
@@ -21,7 +22,11 @@ export default function TaskListContainer({
                     showsVerticalScrollIndicator={false}
                     keyExtractor={keyExtractor}
                     renderItem={({ item }) => (
-                        <Task data={item} dispatch={dispatch} />
+                        <Task
+                            data={item}
+                            dispatch={dispatch}
+                            navigation={navigation}
+                        />
                     )}
                 />
             )}

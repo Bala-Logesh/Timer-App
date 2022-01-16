@@ -1,7 +1,7 @@
 import * as types from './types'
 
 export const initialTaskState = {
-    task: {},
+    task: null,
     tasks: [
         {
             break: 25,
@@ -39,18 +39,21 @@ export const initialTaskState = {
 const TaskReducer = (state = initialTaskState, action) => {
     switch (action.type) {
         case types.ADD_TASK:
-            return { ...state, tasks: [action.payload, ...state.tasks] }
+            state = { ...state, tasks: [action.payload, ...state.tasks] }
+            console.log(state)
+            return state
         case types.SELECT_TASK: {
-            let task = state.tasks.find(t => t.id === action.payload)
-            if (task.selected === true) {
-                task = {}
+            let selTask = state.tasks.find(t => t.id === action.payload)
+            if (state.task && state.task.id === action.payload) {
+                state = { ...state, task: null }
             } else {
-                task.selected = true
+                state = { ...state, task: { ...selTask, selected: true } }
             }
+
             return {
                 ...state,
                 tasks: state.tasks.map(task => {
-                    if (task.id === action.payload && task.selected === true) {
+                    if (task.id === action.payload && task.selected) {
                         return { ...task, selected: false }
                     } else if (task.id === action.payload) {
                         return { ...task, selected: true }
@@ -58,7 +61,6 @@ const TaskReducer = (state = initialTaskState, action) => {
                         return { ...task, selected: false }
                     }
                 }),
-                task,
             }
         }
         case types.COMPLETE_TASK: {

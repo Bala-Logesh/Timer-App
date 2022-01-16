@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import {
     ContainerWrapper,
     ButtonsWrapper,
@@ -6,20 +6,24 @@ import {
 } from '../../globals/wrappers'
 import CustomButton from '../../components/CustomButton'
 import TimerDisplay from '../../components/TimerDisplay'
+import Task from '../../components/Task'
 import ScrollerInput from '../../components/ScrollerInput'
 import { DataContext } from '../../context'
 import { setTimerAction, resetTimerAction } from '../../reducers'
 
-export default function Timer() {
+export default function Timer({ navigation }) {
     const {
         timer: { state, dispatch },
+        task: {
+            state: { task },
+            dispatch: taskDispatch,
+        },
     } = useContext(DataContext)
 
     const [intervalRef, setIntervalRef] = useState(null)
     const [isPaused, setIsPaused] = useState(true)
     const [isStopped, setIsStopped] = useState(false)
     const [reset, setReset] = useState(false)
-
     const startTimer = () => {
         setIsPaused(false)
         setIsStopped(false)
@@ -30,6 +34,17 @@ export default function Timer() {
     let updatedS = state.ss
     let updatedM = state.mm
     let updatedH = state.hh
+
+    useEffect(() => {
+        task &&
+            dispatch(
+                setTimerAction({
+                    hh: task.workIntervalHH,
+                    mm: task.workIntervalMM,
+                    ss: 0,
+                })
+            )
+    }, [task])
 
     const run = () => {
         if (updatedM === 0 && updatedS === 0) {
@@ -74,13 +89,21 @@ export default function Timer() {
 
     return (
         <ContainerWrapper>
-            <CardWrapper direction={'row'}>
-                <ScrollerInput
-                    values={state}
-                    dispatch={dispatch}
-                    reset={reset}
+            {task ? (
+                <Task
+                    data={{ ...task, selected: true }}
+                    dispatch={taskDispatch}
+                    navigation={navigation}
                 />
-            </CardWrapper>
+            ) : (
+                <CardWrapper direction={'row'}>
+                    <ScrollerInput
+                        values={state}
+                        dispatch={dispatch}
+                        reset={reset}
+                    />
+                </CardWrapper>
+            )}
 
             <TimerDisplay hr={state.hh} min={state.mm} sec={state.ss} />
             <ButtonsWrapper>

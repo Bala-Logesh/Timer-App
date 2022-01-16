@@ -5,13 +5,18 @@ import { CardWrapper } from '../../globals/wrappers'
 import { VerticalText, Icons } from './components'
 import { completeTaskAction, selectTaskAction } from '../../reducers'
 
-export default function Task({ data, dispatch }) {
+export default function Task({ data, dispatch, navigation }) {
     const onLeftPress = () => {
         dispatch(completeTaskAction(data.id))
     }
 
     const onRightPress = () => {
         dispatch(selectTaskAction(data.id))
+        if (data.selected) {
+            navigation.navigate('List')
+        } else {
+            navigation.navigate('Timer')
+        }
     }
 
     return (
@@ -35,6 +40,7 @@ export default function Task({ data, dispatch }) {
                 />
             </View>
             <Icons
+                navigation={navigation}
                 side={'right'}
                 selected={data.selected}
                 onPress={onRightPress}

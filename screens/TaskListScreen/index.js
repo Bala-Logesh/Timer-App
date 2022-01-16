@@ -65,10 +65,8 @@ export default function TaskList({ navigation }) {
                 )
             }
         }, 0)
-        console.log(totalMinutes);
         const minutes = totalMinutes % 60
         const hours = (totalMinutes - minutes) / 60
-        console.log(hours, minutes)
         return `${hours}:${minutes}`
     }
 
@@ -93,6 +91,7 @@ export default function TaskList({ navigation }) {
                     flex={1.6}
                     value={showAllTasks}
                     dispatch={dispatch}
+                    navigation={navigation}
                     setValue={setShowAllTasks}
                 />
                 <TaskListContainer
@@ -100,6 +99,7 @@ export default function TaskList({ navigation }) {
                     title={'Completed'}
                     value={showCompletedTasks}
                     dispatch={dispatch}
+                    navigation={navigation}
                     setValue={setShowCompletedTasks}
                 />
             </View>
